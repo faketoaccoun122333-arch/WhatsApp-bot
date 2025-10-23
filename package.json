@@ -6,10 +6,23 @@
   "scripts": {
     "start": "node index.js"
   },
-  "keywords": ["whatsapp", "bot", "baileys"],
+  "keywords": [
+    "whatsapp",
+    "bot",
+    "baileys"
+  ],
   "author": "Bang",
   "license": "MIT",
   "dependencies": {
-    "@whiskeysockets/baileys": "^6.5.0"
-  }
+    "@whiskeysockets/baileys": "^6.7.20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/username/whatsapp-bot.git"
+  },
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/username/whatsapp-bot/issues"
+  },
+  "homepage": "https://github.com/username/whatsapp-bot#readme"
 }
