@@ -13,9 +13,6 @@
   ],
   "author": "Bang",
   "license": "MIT",
-  "dependencies": {
-    "@whiskeysockets/baileys": "^6.7.20"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/username/whatsapp-bot.git"
@@ -24,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/username/whatsapp-bot/issues"
   },
-  "homepage": "https://github.com/username/whatsapp-bot#readme"
+  "homepage": "https://github.com/username/whatsapp-bot#readme",
+  "dependencies": {
+    "@whiskeysockets/baileys": "^6.2.0"
+  }
 }
