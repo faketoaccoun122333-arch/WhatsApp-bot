@@ -1,23 +1,15 @@
-const { default: makeWASocket, DisconnectReason, fetchLatestBaileysVersion, makeInMemoryStore, useMultiFileAuthState } = require('@whiskeysockets/baileys')
+const { default: makeWASocket, DisconnectReason, fetchLatestBaileysVersion, makeInMemoryStore, useSingleFileAuthState } = require('@whiskeysockets/baileys')
 const { Boom } = require('@hapi/boom')
-
-const store = makeInMemoryStore({ logger: undefined })
-store.readFromFile('./store.json')
-setInterval(() => {
-  store.writeToFile('./store.json')
-}, 10_000)
 
 async function startBot() {
   const { version } = await fetchLatestBaileysVersion()
-  const { state, saveCreds } = await useMultiFileAuthState('./auth_info')
+  const { state, saveCreds } = useSingleFileAuthState('./store.json')
 
   const sock = makeWASocket({
     version,
-    printQRInTerminal: true,
     auth: state
   })
 
-  store.bind(sock.ev)
   sock.ev.on('creds.update', saveCreds)
 
   sock.ev.on('connection.update', (update) => {
@@ -25,8 +17,7 @@ async function startBot() {
     if (connection === 'close') {
       const reason = new Boom(lastDisconnect?.error)?.output?.statusCode
       if (reason === DisconnectReason.loggedOut) {
-        console.log('❌ Terlogout, scan ulang QR')
-        startBot()
+        console.log('❌ Terlogout, session tidak valid')
       } else {
         console.log('🔄 Koneksi terputus, reconnect...')
         startBot()
