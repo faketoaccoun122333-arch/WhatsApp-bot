@@ -1,8 +1,9 @@
 {
   "name": "whatsapp-bot",
-  "version": "1.0.0",
   "description": "Bot WhatsApp sederhana pakai Baileys",
+  "version": "1.0.0",
   "main": "index.js",
+  "type": "commonjs",
   "scripts": {
     "start": "node index.js"
   },
@@ -11,18 +12,15 @@
     "bot",
     "baileys"
   ],
-  "author": "Bang",
+  "author": "Ledakan",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/username/whatsapp-bot.git"
+    "url": "git@github.com:faketoaccoun122333-arch/WhatsApp-bot.git"
   },
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/username/whatsapp-bot/issues"
-  },
-  "homepage": "https://github.com/username/whatsapp-bot#readme",
+  "homepage": "https://github.com/faketoaccoun122333-arch/WhatsApp-bot",
   "dependencies": {
-    "@whiskeysockets/baileys": "^6.2.0"
+    "@whiskeysockets/baileys": "^6.2.0",
+    "dotenv": "^16.0.0"
   }
 }
