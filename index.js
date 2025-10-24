@@ -2,13 +2,13 @@ const {
   default: makeWASocket,
   DisconnectReason,
   fetchLatestBaileysVersion,
-  useSingleFileAuthState
+  useMultiFileAuthState
 } = require('@whiskeysockets/baileys')
 const { Boom } = require('@hapi/boom')
 
 async function startBot() {
   const { version } = await fetchLatestBaileysVersion()
-  const { state, saveCreds } = useSingleFileAuthState('./store.json')
+  const { state, saveCreds } = await useMultiFileAuthState('./auth_info')
 
   const sock = makeWASocket({
     version,
@@ -28,11 +28,13 @@ async function startBot() {
         startBot()
       }
     } else if (connection === 'open') {
-      console.log('✅ Bot berhasil terhubung!')
+      console.log('✅ Bot berhasil login ke WhatsApp!')
     }
   })
 
   sock.ev.on('messages.upsert', async ({ messages }) => {
+    console.log('📩 Pesan masuk:', messages)
+
     const msg = messages[0]
     if (!msg.message || msg.key.fromMe) return
 
@@ -44,6 +46,8 @@ async function startBot() {
 
     const lowerText = text.toLowerCase()
     const sender = msg.key.remoteJid
+
+    console.log('📨 Dari:', sender, '| Isi:', lowerText)
 
     if (lowerText.includes('hai')) {
       await sock.sendMessage(sender, { text: 'Hai juga 😘' })
