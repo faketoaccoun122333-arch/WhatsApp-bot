@@ -1,0 +1,9 @@
+{
+  "build": {
+    "nixpacks": {
+      "languages": {
+        "nodejs": "20"
+      }
+    }
+  }
+}
