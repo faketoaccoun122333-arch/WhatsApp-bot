@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/faketoaccoun122333-arch/WhatsApp-bot",
   "dependencies": {
-    "@whiskeysockets/baileys": "^6.2.0",
+    "@whiskeysockets/baileys": "^6.5.0",
     "dotenv": "^16.0.0"
   }
 }
