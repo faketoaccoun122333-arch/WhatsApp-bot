@@ -1,4 +1,9 @@
-const { default: makeWASocket, DisconnectReason, fetchLatestBaileysVersion, makeInMemoryStore, useSingleFileAuthState } = require('@whiskeysockets/baileys')
+const {
+  default: makeWASocket,
+  DisconnectReason,
+  fetchLatestBaileysVersion,
+  useSingleFileAuthState
+} = require('@whiskeysockets/baileys')
 const { Boom } = require('@hapi/boom')
 
 async function startBot() {
@@ -31,14 +36,20 @@ async function startBot() {
     const msg = messages[0]
     if (!msg.message || msg.key.fromMe) return
 
-    const text = msg.message.conversation?.toLowerCase() || ''
+    const text =
+      msg.message?.conversation ||
+      msg.message?.extendedTextMessage?.text ||
+      msg.message?.imageMessage?.caption ||
+      ''
+
+    const lowerText = text.toLowerCase()
     const sender = msg.key.remoteJid
 
-    if (text.includes('hai')) {
+    if (lowerText.includes('hai')) {
       await sock.sendMessage(sender, { text: 'Hai juga 😘' })
-    } else if (text.includes('sayang')) {
+    } else if (lowerText.includes('sayang')) {
       await sock.sendMessage(sender, { text: 'Aku juga sayang kamu 😍' })
-    } else if (text.includes('rindu')) {
+    } else if (lowerText.includes('rindu')) {
       await sock.sendMessage(sender, { text: 'Aku juga rindu kamu 🥺 Jangan lama-lama ya~' })
     }
   })
